@@ -38,41 +38,10 @@ async def refunc(client,message):
          end_point = message.text 
          subprocess.call(['audio_extract.run(input_path="./downloads/entry", output_path="./audresult.mp3", start_time=start_point, duration=end_point)'])   
          with open('audresult.mp3', 'rb') as f:
-         bot.send_audio(message.chat.id, f)
+           bot.send_audio(message.chat.id, f)
          subprocess.call(['unlink','audresult.mp3']) 
               
             
   
-
-    # Execute speech.py script with entry file
-  subprocess.call(['python3', 'speech.py', 'RK3ETXWBJQSMO262RXPAIXFSG6NH3QRH', "./downloads/entry" , 'transcription.txt'])
-    # Upload transcription file to user
-  with open('transcription.txt', 'rb') as f:
-        bot.send_document(message.chat.id, f)
-  subprocess.call(['unlink','transcription.txt'])   
- 
-@bot.on_message(filters.private & filters.incoming & filters.voice )
-
-def _telegram_file(client, message):
-  try: 
-    with open('/home/mohamadwardy88/trans5115text/transcription.txt', 'r') as fh:
-        if os.stat('/home/mohamadwardy88/trans5115text/transcription.txt').st_size == 0: 
-            pass
-        else:
-            sent_message = message.reply_text('هناك تفريغ يتم الآن . أرسل الصوتية بعد مدة من فضلك', quote=True)
-            return
-  except FileNotFoundError: 
-    pass  
-  user_id = message.from_user.id
-  sent_message = message.reply_text('جار التفريغ', quote=True)
-  file = message.voice
-  file_path = message.download(file_name="entry")
-
-    # Execute speech.py script with entry file
-  subprocess.call(['python3', 'speech.py', 'RK3ETXWBJQSMO262RXPAIXFSG6NH3QRH', "./downloads/entry" , 'transcription.txt'])
-    # Upload transcription file to user
-  with open('transcription.txt', 'rb') as f:
-        bot.send_document(message.chat.id, f)
-  subprocess.call(['unlink','transcription.txt'])      
 
 bot.run()
