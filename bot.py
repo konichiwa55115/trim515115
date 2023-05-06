@@ -27,20 +27,15 @@ def _telegram_file(client, message):
   sent_message = message.reply_text('الآن أرسل نقطة البداية على صيغة \n\n 0:00:00', quote=True)
   file = message.audio
 @bot.on_message(filters.private & filters.incoming & filters.text )
-async def refunc(client,message):
+def refunc(client,message):
             user_id = message.from_user.id 
             sent_message = message.reply_text('الآن أرسل نقطة النهاية على صيغة \n\n 0:00:00', quote=True)
         	start_point = message.text  
-@bot.on_message(filters.private & filters.incoming & filters.text )
-async def refunc(client,message):
-         user_id = message.from_user.id 
-         sent_message = message.reply_text('جار القطع ', quote=True)
-         end_point = message.text 
-         audio_extract.run(input_path="./downloads/entry", output_path="./audresult.mp3", start_time={start_point}, duration={end_point}) 
-         with open('audresult.mp3', 'rb') as f:
-           bot.send_audio(message.chat.id, f)
-         subprocess.call(['unlink','audresult.mp3']) 
-              
+            audio_extract.run(input_path="./downloads/entry", output_path="./audresult.mp3", start_time={start_point}, duration="0:05:00) 
+            with open('audresult.mp3', 'rb') as f:
+              bot.send_audio(message.chat.id, f)
+            subprocess.call(['unlink','audresult.mp3']) 
+            
             
   
 
