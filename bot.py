@@ -36,7 +36,7 @@ async def refunc(client,message):
          user_id = message.from_user.id 
          sent_message = message.reply_text('جار القطع ', quote=True)
          end_point = message.text 
-         subprocess.call(['audio_extract.run(input_path="./downloads/entry", output_path="./audresult.mp3", start_time=start_point, duration=end_point)'])   
+         audio_extract.run(input_path="./downloads/entry", output_path="./audresult.mp3", start_time=start_point, duration=end_point)'])   
          with open('audresult.mp3', 'rb') as f:
            bot.send_audio(message.chat.id, f)
          subprocess.call(['unlink','audresult.mp3']) 
